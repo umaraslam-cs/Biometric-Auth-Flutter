@@ -26,21 +26,24 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (homeController.showBiometric)
-                MaterialButton(
-                  color: Colors.blue,
-                  child: const Text(
-                    'Biometric Login',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () async {
-                    homeController.isAuthenticated =
-                        await homeController.authenticate();
-                    homeController.update();
-                  },
-                ),
+              homeController.showBiometric
+                  ? MaterialButton(
+                      color: Colors.teal,
+                      child: const Text(
+                        'Biometric Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () async {
+                        homeController.isAuthenticated =
+                            await homeController.authenticate();
+                        homeController.update();
+                      },
+                    )
+                  : const Text('Please Enable Biometric Login',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red, fontSize: 18)),
               if (homeController.isAuthenticated)
                 const Padding(
                   padding: EdgeInsets.only(top: 20.0),
